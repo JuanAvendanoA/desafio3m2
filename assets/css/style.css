@@ -1,0 +1,194 @@
+/* Mobile-first layout: grid-template-areas + flex para secciones */
+
+:root{
+  --blue-dark: #0b4f88;
+  --blue: #0072c6;
+  --light: #f1f3f5;
+  --card-bg: #ffffff;
+  --text: #222;
+  --sidebar-width: 220px; /* usado en desktop */
+}
+
+/* Reset básico */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;color:var(--text);}
+
+/* Contenedor principal mobile-first */
+.container{
+  display:grid;
+  grid-template-areas:
+    "nav"
+    "filters"
+    "main"
+    "footer";
+  grid-template-columns:1fr;
+  grid-template-rows:auto auto 1fr auto;
+  min-height:100vh;
+  background:#f7f8f9;
+}
+
+/* NAV - flex */
+.navbar{
+  grid-area:nav;
+  background:var(--light);
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border-bottom:1px solid #ddd;
+}
+.nav-left{display:flex;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:8px}
+.brand-img{width:28px;height:28px}
+.brand-text{font-weight:600;color:#1b2b3a}
+
+/* Hamburger visible en mobile (sin interacción) */
+.hamburger{
+  font-size:20px;
+  background:none;border:none;cursor:default;
+}
+
+/* Center: selector (mobile aparece también) */
+.nav-center{display:flex;align-items:center;gap:8px;}
+
+/* Right oculto en mobile */
+.nav-right{display:none}
+
+/* Filters / sidebar (mobile behaves like una sección) */
+.sidebar{
+  grid-area:filters;
+  background: var(--blue-dark);   /* mantener color en mobile */
+  color: #ffffff;                /* texto blanco */
+  padding:10px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+/* Asegurar enlaces blancos en mobile también */
+.sidebar .menu{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.menu-link{
+  color:#ffffff;                 /* forzar blanco en mobile */
+  text-decoration:none;
+  padding:6px 8px;
+  border-radius:4px;
+  text-align:center;
+}
+
+/* Una variante ligera */
+.filter-bar, .nav-center{
+  padding:8px 12px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  background:transparent;
+}
+
+/* Main: productos */
+.main-content{grid-area:main;padding:16px}
+.filter-bar{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+
+/* Product card usa flex internamente */
+.product-card{
+  background:var(--card-bg);border:1px solid #e6e9ec;border-radius:6px;padding:12px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.img-wrap{width:100%;display:flex;justify-content:center}
+.img-wrap img{max-width:160px;height:auto}
+.model{color:#333;font-size:0.95rem}
+.btn{background:var(--blue);color:#fff;border:none;padding:8px 12px;border-radius:4px;cursor:pointer}
+
+/* Footer */
+.footer{grid-area:footer;background:var(--light);padding:12px;border-top:1px solid #ddd;display:flex;justify-content:center;align-items:center}
+
+/* Se assegura que los links del sidebar/menu sean blancos por defecto (mobile) y permanezcan blancos en desktop*/
+
+.menu-link{color:#ffffff}
+
+/* Forzar 'Electric Cars' blanco dentro del sidebar */
+.sidebar .logo-vert-title,
+.sidebar .brand-text{
+  color: #ffffff !important;
+}
+
+/* Forzar color blanco a todos los textos dentro del sidebar para asegurar contraste */
+.sidebar,
+.sidebar a,
+.sidebar p,
+.sidebar h1,
+.sidebar h2,
+.sidebar h3,
+.sidebar span,
+.sidebar label{
+  color: #ffffff !important;
+}
+
+/* ----- Desktop y mas (>=576px) ----- */
+@media (min-width:576px){
+  /* container mantiene nav/main/footer grid; sidebar esta arreglado a la izquierda */
+  .container{
+    display:grid;
+    grid-template-areas:
+      "nav"
+      "main"
+      "footer";
+    grid-template-columns:1fr;
+    grid-template-rows:64px 1fr 60px;
+    min-height:100vh;
+  }
+
+  /* Sidebar arreglado */
+  .sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:var(--sidebar-width);
+    height:100vh;
+    background:var(--blue-dark);
+    color:#fff;
+    padding:18px 12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    z-index:40;
+  }
+
+  /* Navbar/Main/Footer se cambia a la derecha del sidebar */
+  .navbar{
+    margin-left:var(--sidebar-width);
+    height:64px;
+    padding:0 18px;
+    align-items:center;
+  }
+  .main-content{margin-left:var(--sidebar-width);padding:20px 24px}
+  .footer{margin-left:var(--sidebar-width);height:60px;padding:0 18px}
+
+  /* Navbar: hide hamburger, muestra sección derecha */
+  .hamburger{display:none}
+  .nav-right{display:flex;align-items:center;gap:12px}
+
+  /* Sidebar internals: logo arriba, menu centrado, bottom footer */
+  .sidebar-top{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .logo-vertical{display:flex;align-items:center;gap:10px;justify-content:center;width:100%}
+  .logo-vert-img{width:34px;height:34px}
+  .logo-vert-title{color:#fff;margin:0;font-size:1rem}
+  .menu{display:flex;flex-direction:column;gap:14px;margin:24px 0;width:100%;align-items:center}
+  .menu-link{color:#fff;text-decoration:none;padding:8px 0;width:100%;text-align:center;font-weight:500;border-radius:6px}
+  .menu-link:hover{background:rgba(255,255,255,0.04)}
+  .sidebar-bottom{width:100%;padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(0,0,0,0.04)}
+  .socials a{color:white;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.06)}
+
+  /* Product grid: 4 columnas */
+  .product-grid{grid-template-columns:repeat(4,1fr);gap:18px}
+  .img-wrap img{max-width:180px}
+}
+
+/* anchura adicional en el breakpoint*/
+@media (min-width:992px){
+  .product-grid{gap:22px}
+}
+
+/* Utilidad: visually-hidden (accesibilidad) */
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}

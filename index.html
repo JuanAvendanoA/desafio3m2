@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modulo 2 - Desafio 3</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Menú de navegación (mobile-first) -->
+    
+
+      <div class="nav-right">
+        <!-- Visible solo en desktop -->
+        <button class="icon-filter" aria-hidden="true">🔍</button>
+      </div>
+    </header>
+
+    <!-- Sección de filtros (en mobile aparece entre nav y main; en desktop es sidebar fijo) -->
+    <aside class="sidebar" role="navigation">
+      <div class="sidebar-top">
+        <div class="logo-vertical">
+          <img src="assets/img/car-icon.png" alt="" class="logo-vert-img">
+          <h1 class="logo-vert-title">Electric Cars</h1>
+        </div>
+
+        <!-- Menú: Inicio, Catálogo, Ofertas, Contacto -->
+        <nav class="menu" aria-label="Menú principal">
+          <a href="#" class="menu-link">Inicio</a>
+          <a href="#" class="menu-link">Catálogo</a>
+          <a href="#" class="menu-link">Ofertas</a>
+          <a href="#" class="menu-link">Contacto</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="socials">
+          <a href="#" aria-hidden="true">f</a>
+          <a href="#" aria-hidden="true">ig</a>
+        </div>
+        <p class="copyright">Todos los derechos reservados</p>
+      </div>
+    </aside>
+
+    <!-- Sección Principal (productos + paginación) -->
+    <main class="main-content" role="main">
+      <div class="filter-bar">
+        <label class="filter-label" for="filter-mobile">Ordenar Por:</label>
+        <select id="filter-mobile" class="filter-select">
+          <option>Precio</option>
+        </select>
+      </div>
+
+      <section class="product-grid" aria-label="Productos">
+        <!-- Tarjetas de ejemplo -->
+        <article class="product-card">
+          <div class="img-wrap"><img src="assets/img/city-car.png" alt="City Car"></div>
+          <p class="model">Model: City Car</p>
+          <button class="btn">Ver más</button>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap"><img src="assets/img/city-car.png" alt="City Car"></div>
+          <p class="model">Model: City Car</p>
+          <button class="btn">Ver más</button>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap"><img src="assets/img/city-car.png" alt="City Car"></div>
+          <p class="model">Model: City Car</p>
+          <button class="btn">Ver más</button>
+        </article>
+        <article class="product-card">
+          <div class="img-wrap"><img src="assets/img/city-car.png" alt="City Car"></div>
+          <p class="model">Model: City Car</p>
+          <button class="btn">Ver más</button>
+        </article>
+      </section>
+
+      <nav class="pagination" aria-label="Paginación">
+        <button class="page">&laquo;</button>
+        <button class="page active">1</button>
+        <button class="page">2</button>
+        <button class="page">3</button>
+        <button class="page">&raquo;</button>
+      </nav>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <p>© 2025 Electric Cars</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
